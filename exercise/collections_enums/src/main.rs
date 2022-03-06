@@ -1,32 +1,3 @@
-// Silence some warnings that could distract from the exercise
-#![allow(unused_variables, unused_mut, dead_code)]
-
-// Someone is shooting arrows at a target.  We need to classify the shots.
-//
-// 1a. Create an enum called `Shot` with variants:
-// - `Bullseye`
-// - `Hit`, containing the distance from the center (an f64)
-// - `Miss`
-//
-// You will need to complete 1b as well before you will be able to run this program successfully.
-
-enum Shot {
-    Bullseye,
-    Hit(f64),
-    Miss
-}
-
-impl Shot {
-    fn points(self) -> i32 {
-        match self {
-            Shot::Bullseye => 5,
-            Shot::Hit(x) if x < 3.0 => 2,
-            Shot::Hit(x) => 1,
-            Shot::Miss => 0
-        }
-    }
-}
-
 fn main() {
     // Simulate shooting a bunch of arrows and gathering their coordinates on the target.
     let arrow_coords: Vec<Coord> = get_arrow_coords(5);
@@ -52,7 +23,23 @@ fn main() {
     println!("Final point total is: {}", total);
 }
 
-// A coordinate of where an Arrow hit
+enum Shot {
+    Bullseye,
+    Hit(f64),
+    Miss
+}
+
+impl Shot {
+    fn points(self) -> i32 {
+        match self {
+            Shot::Bullseye => 5,
+            Shot::Hit(x) if x < 3.0 => 2,
+            Shot::Hit(x) => 1,
+            Shot::Miss => 0
+        }
+    }
+}
+
 #[derive(Debug)]
 struct Coord {
     x: f64,
